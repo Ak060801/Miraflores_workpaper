@@ -18,13 +18,18 @@ npm run check      # run the independent checks from the command line
 
 The packet is loaded as delivered from `public/packet.json`. Everything the workpaper adds is an append-only event log saved in the browser (Firm › Data exports and imports it). Open two tabs as two roles to see live collaboration.
 
-## Deploy (gives you the link to submit)
+## Deploy on GitHub Pages (gives you the link to submit)
 
-**Vercel:** push this folder to a GitHub repo, then "Add New Project" on vercel.com, import the repo, accept the detected Vite settings (build `npm run build`, output `dist`). `vercel.json` is included.
+1. Create a new repository on GitHub (public, or private on a plan that allows Pages). Any name works.
+2. Push this folder to it:
+   ```bash
+   git remote add origin https://github.com/<your-username>/<repo-name>.git
+   git push -u origin main
+   ```
+3. On GitHub: **Settings › Pages › Build and deployment › Source: GitHub Actions**.
+4. The included workflow (`.github/workflows/deploy.yml`) builds and deploys on every push to `main`. Watch it under the **Actions** tab; when it finishes, the site is at `https://<your-username>.github.io/<repo-name>/`.
 
-**Netlify:** "Add new site" › import the repo, build command `npm run build`, publish directory `dist`.
-
-No server or environment variables are needed.
+No server, secrets or environment variables are needed. The build uses a relative base path, so it works under any repository name.
 
 ## Try it
 
