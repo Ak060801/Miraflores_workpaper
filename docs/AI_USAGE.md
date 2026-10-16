@@ -11,7 +11,7 @@
 - Tested the app end to end in a headless browser across roles (preparer, reviewer, partner, client, admin, staff without clearance) through to filing, freeze and amendment.
 
 **What I did** *(fill in; examples)*
-- Chose the delivery format (a source repo deployed on Vercel) and directed the scope.
+- Chose the delivery format (a source repo deployed on GitHub Pages) and directed the scope.
 - Reviewed every finding and decided the judgment calls: …
 - Designed and built the three contribution slots: review triage scoring, the 2026 plan, firm policies (see `CONTRIBUTIONS.md`; `git log --author` shows exactly which commits are mine).
 - Rewrote the core-idea page and recorded the walkthrough.
