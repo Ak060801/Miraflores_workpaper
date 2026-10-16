@@ -4,7 +4,7 @@ import { AREAS } from '../data/model';
 import { store } from '../store/events';
 import { buildSeed } from '../app/seed';
 import { Pill, Tabs, fmt, date, dateTime, useRun, Avatar, Ref, ContribTag, toast } from '../ui/kit';
-import { POLICIES } from '../contrib/abbas/firmPolicy';
+import { POLICIES } from '../contrib/ayaan/firmPolicy';
 import { ROLE_LABEL } from '../store/session';
 
 export function FirmView() {
@@ -68,11 +68,11 @@ function Policies() {
   const { m, wp, findings } = ctx;
   return (
     <div className="card contrib">
-      <div className="row" style={{ marginBottom: 8 }}><h2 style={{ margin: 0 }}>Firm policies beyond the starter standards</h2><span className="spacer" /><ContribTag slot="Slot 3: firm policy" author={POLICIES.every((p) => p.author === 'abbas') ? 'abbas' : 'baseline'} /></div>
-      <div className="small muted" style={{ marginBottom: 8 }}>Each policy is code in <span className="mono">src/contrib/abbas/firmPolicy.ts</span>, tested continuously, and blocks a sign-off level until it passes.</div>
+      <div className="row" style={{ marginBottom: 8 }}><h2 style={{ margin: 0 }}>Firm policies beyond the starter standards</h2><span className="spacer" /><ContribTag slot="Slot 3: firm policy" author={POLICIES.every((p) => p.author === 'ayaan') ? 'ayaan' : 'baseline'} /></div>
+      <div className="small muted" style={{ marginBottom: 8 }}>Each policy is code in <span className="mono">src/contrib/ayaan/firmPolicy.ts</span>, tested continuously, and blocks a sign-off level until it passes.</div>
       <table className="t"><tbody>
         {POLICIES.map((p) => { const v = p.test({ m, wp, findings }); return (
-          <tr key={p.id}><td><Pill kind={p.author === 'abbas' ? 'violet' : ''}>{p.author}</Pill></td><td>{p.text}<div className="small muted">blocks {p.blocks} sign-off</div>{v.slice(0, 5).map((x) => <div key={x.ref} className="small"><Ref r={x.ref} short /> {x.message}</div>)}</td><td>{v.length ? <Pill kind="err">{v.length} open</Pill> : <Pill kind="ok">passes</Pill>}</td></tr>
+          <tr key={p.id}><td><Pill kind={p.author === 'ayaan' ? 'violet' : ''}>{p.author}</Pill></td><td>{p.text}<div className="small muted">blocks {p.blocks} sign-off</div>{v.slice(0, 5).map((x) => <div key={x.ref} className="small"><Ref r={x.ref} short /> {x.message}</div>)}</td><td>{v.length ? <Pill kind="err">{v.length} open</Pill> : <Pill kind="ok">passes</Pill>}</td></tr>
         ); })}
       </tbody></table>
     </div>

@@ -4,7 +4,7 @@ import { AREAS, areaOfDoc, linesUsingDoc } from '../data/model';
 import { openDoc } from '../store/session';
 import { Ref, fmt, Pill, Tabs, date, useRun, ContribTag, Sev } from '../ui/kit';
 import { evTrust } from '../ui/Inspector';
-import { TRUST_SCORE_AUTHOR } from '../contrib/abbas/trustScore';
+import { TRUST_SCORE_AUTHOR } from '../contrib/ayaan/trustScore';
 
 export function DocumentsView() {
   const [tab, setTab] = useState('index');
@@ -92,7 +92,7 @@ function Triage() {
     <div className="card contrib">
       <div className="row" style={{ marginBottom: 8 }}>
         <ContribTag slot="Slot 1: trust score" author={TRUST_SCORE_AUTHOR} />
-        <span className="small muted">Review order for extracted values: least trustworthy first. Scoring lives in <span className="mono">src/contrib/abbas/trustScore.ts</span>.</span>
+        <span className="small muted">Review order for extracted values: least trustworthy first. Scoring lives in <span className="mono">src/contrib/ayaan/trustScore.ts</span>.</span>
       </div>
       <div className="row wrap" style={{ marginBottom: 10 }}>
         <Pill kind="err">verify {bands.verify}</Pill><Pill kind="warn">look {bands.look}</Pill><Pill kind="ok">trust {bands.trust}</Pill>

@@ -1,12 +1,12 @@
-# Abbas's contribution slots
+# Ayaan's contribution slots
 
-Three self-contained parts of the workpaper are reserved for Abbas. Each one already has a working **baseline** (written by Claude so the app runs end to end) and a fixed interface, so replacing the baseline cannot break the rest of the app.
+Three self-contained parts of the workpaper are reserved for Ayaan. Each one already has a working **baseline** (written by Claude so the app runs end to end) and a fixed interface, so replacing the baseline cannot break the rest of the app.
 
-Each slot shows a purple **✎ Abbas** tag in the UI. The tag says "(baseline)" until you flip the author constant in the file to `'abbas'`.
+Each slot shows a purple **✎ Ayaan** tag in the UI. The tag says "(baseline)" until you flip the author constant in the file to `'ayaan'`.
 
 When you finish a slot:
 1. Replace the code between the `BASELINE (Claude)` markers.
-2. Set the author constant (`TRUST_SCORE_AUTHOR`, `author: 'abbas'`) so the UI tag updates.
+2. Set the author constant (`TRUST_SCORE_AUTHOR`, `author: 'ayaan'`) so the UI tag updates.
 3. Commit under your own name (see `CONTRIBUTIONS.md`), and tick the slot in that file.
 
 ---
@@ -65,4 +65,4 @@ When you finish a slot:
 - No partner sign-off while any area has time logged above 125% of budget without a note.
 - A preparer without sensitive-data clearance may not sign off an area containing SSNs or account numbers.
 
-**Acceptance check:** Firm › Policies lists your rules with "abbas" tags; at least one of them blocks a sign-off in the seeded season until the underlying issue is fixed.
+**Acceptance check:** Firm › Policies lists your rules with "ayaan" tags; at least one of them blocks a sign-off in the seeded season until the underlying issue is fixed.

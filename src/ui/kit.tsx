@@ -137,7 +137,7 @@ export function Sev({ s }: { s: string }) {
   return <Pill kind={k}>{l}</Pill>;
 }
 export function ContribTag({ slot, author }: { slot: string; author: string }) {
-  return <span className="contrib-tag" title={`Contribution slot ${slot}: ${author === 'abbas' ? 'built by Abbas' : 'baseline by Claude, owned by Abbas'}`}>✎ Abbas · {slot}{author !== 'abbas' ? ' (baseline)' : ''}</span>;
+  return <span className="contrib-tag" title={`Contribution slot ${slot}: ${author === 'ayaan' ? 'built by Ayaan' : 'baseline by Claude, owned by Ayaan'}`}>✎ Ayaan · {slot}{author !== 'ayaan' ? ' (baseline)' : ''}</span>;
 }
 
 export function Prompt({ label, onSubmit, placeholder, children, multiline = true, cta = 'Save' }: { label: string; onSubmit: (text: string) => void; placeholder?: string; children?: ReactNode; multiline?: boolean; cta?: string }) {

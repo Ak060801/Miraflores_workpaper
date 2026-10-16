@@ -5,7 +5,7 @@ import { areaOfLine, AREAS, linesUsingEv } from '../data/model';
 import { inspect, openDoc, go } from '../store/session';
 import { CATEGORY_LABEL, taxEffect, type Category } from '../store/projections';
 import { Ref, Refs, fmt, LineVal, Pill, Avatar, dateTime, useRun, Prompt, Effect, Sev, useReveal } from './kit';
-import { trustScore } from '../contrib/abbas/trustScore';
+import { trustScore } from '../contrib/ayaan/trustScore';
 
 export function InspectorDrawer({ r }: { r: string }) {
   const { m, vi } = useCtx();

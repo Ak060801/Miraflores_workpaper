@@ -1,7 +1,7 @@
 import { useCtx } from '../app/ctx';
 import { currentValue } from '../store/projections';
 import { Refs, Pill, fmt, date, ContribTag } from '../ui/kit';
-import { plan2026 } from '../contrib/abbas/planning2026';
+import { plan2026 } from '../contrib/ayaan/planning2026';
 
 export function CarryForwardView() {
   const { m, vi, wp } = useCtx();

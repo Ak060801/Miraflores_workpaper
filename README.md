@@ -44,7 +44,7 @@ src/
   app/         context, permission-checked actions, filing gate, demo season seed
   ui/          trace drawer, document viewer, shared components
   views/       screens
-  contrib/abbas/  contribution slots owned by Abbas (see CONTRIBUTIONS.md)
+  contrib/ayaan/  contribution slots owned by Ayaan (see CONTRIBUTIONS.md)
 scripts/       command-line check runner
 docs/          the written deliverables
 ```

@@ -1,7 +1,7 @@
 // ============================================================================
-// ABBAS-SLOT 3: Firm policy extensions (beyond the starter standards)
-// Owner: Abbas. Status: ONE EXAMPLE RULE (Claude). Replace / extend.
-// Spec: src/contrib/abbas/README.md#slot-3
+// AYAAN-SLOT 3: Firm policy extensions (beyond the starter standards)
+// Owner: Ayaan. Status: ONE EXAMPLE RULE (Claude). Replace / extend.
+// Spec: src/contrib/ayaan/README.md#slot-3
 // ============================================================================
 //
 // Each policy is a rule the workpaper enforces automatically. `test` returns
@@ -18,7 +18,7 @@ export interface Policy {
   id: string;
   text: string;                       // the rule as a partner would write it
   blocks: 'preparer' | 'reviewer' | 'partner' | 'filing';
-  author: 'example' | 'abbas';
+  author: 'example' | 'ayaan';
   test: (c: PolicyContext) => { ref: string; message: string }[];
 }
 

@@ -1,7 +1,7 @@
 // ============================================================================
-// ABBAS-SLOT 1: Review triage ("trust score") for extracted values
-// Owner: Abbas. Status: BASELINE ONLY (written by Claude as a placeholder).
-// Spec: src/contrib/abbas/README.md#slot-1
+// AYAAN-SLOT 1: Review triage ("trust score") for extracted values
+// Owner: Ayaan. Status: BASELINE ONLY (written by Claude as a placeholder).
+// Spec: src/contrib/ayaan/README.md#slot-1
 // ============================================================================
 //
 // The pipeline gives every extracted value a confidence. The packet warns that
@@ -36,7 +36,7 @@ export interface TrustResult {
 }
 
 export function trustScore(i: TrustInput): TrustResult {
-  // ---- BASELINE (Claude) - replace with Abbas's model --------------------
+  // ---- BASELINE (Claude) - replace with Ayaan's model --------------------
   let score = i.ev.confidence;
   const reasons: string[] = [`pipeline confidence ${i.ev.confidence.toFixed(2)}`];
   if (!i.printedFound) { score *= 0.5; reasons.push('extracted text not found on printed page'); }
@@ -46,4 +46,4 @@ export function trustScore(i: TrustInput): TrustResult {
   // ------------------------------------------------------------------------
 }
 
-export const TRUST_SCORE_AUTHOR: 'baseline' | 'abbas' = 'baseline';
+export const TRUST_SCORE_AUTHOR: 'baseline' | 'ayaan' = 'baseline';

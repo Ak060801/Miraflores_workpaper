@@ -1,7 +1,7 @@
 // ============================================================================
-// ABBAS-SLOT 2: 2026 estimated tax plan (next-year planning)
-// Owner: Abbas. Status: BASELINE ONLY (written by Claude as a placeholder).
-// Spec: src/contrib/abbas/README.md#slot-2
+// AYAAN-SLOT 2: 2026 estimated tax plan (next-year planning)
+// Owner: Ayaan. Status: BASELINE ONLY (written by Claude as a placeholder).
+// Spec: src/contrib/ayaan/README.md#slot-2
 // ============================================================================
 //
 // Input: the finalized 2025 position (workpaper totals after adjustments) and
@@ -26,10 +26,10 @@ export interface PlanInput {
 }
 
 export interface Installment { jurisdiction: 'federal' | 'california'; due: string; amount: number }
-export interface Plan { installments: Installment[]; assumptions: string[]; author: 'baseline' | 'abbas' }
+export interface Plan { installments: Installment[]; assumptions: string[]; author: 'baseline' | 'ayaan' }
 
 export function plan2026(i: PlanInput): Plan {
-  // ---- BASELINE (Claude) - replace with Abbas's plan ---------------------
+  // ---- BASELINE (Claude) - replace with Ayaan's plan ---------------------
   const fedTarget = Math.round(i.fed2025TotalTax * 1.1);
   const fedNet = Math.max(0, fedTarget - i.fedWithholding2025);
   const fedEach = Math.ceil(fedNet / 4 / 10) * 10;

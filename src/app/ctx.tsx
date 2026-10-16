@@ -5,7 +5,7 @@ import { store, useEvents, effectiveEvents, type WPEvent } from '../store/events
 import { useSession, usersFrom, type User, can, type Permission } from '../store/session';
 import { project, type WP, areaSnapshot, fingerprint, latestSignoff, type Category } from '../store/projections';
 import { runChecks, type Finding, type ProposedAdj } from '../checks/checks';
-import { POLICIES } from '../contrib/abbas/firmPolicy';
+import { POLICIES } from '../contrib/ayaan/firmPolicy';
 
 export interface Ctx {
   m: Model;
