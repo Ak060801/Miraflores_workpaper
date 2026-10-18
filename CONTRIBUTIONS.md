@@ -4,17 +4,17 @@ This file keeps a clear line between the work done with Claude (Anthropic's AI) 
 
 ## How to tell from git
 
-The first commit is authored by **Claude (AI pair engineer)**. Commit everything you write yourself under your own name and email:
+All commits in this repository are under my name. The first five commits were written by Claude (AI pair engineer) and committed by me:
 
-```bash
-git config user.name "Ayaan"
-git config user.email "you@example.com"
-git log --author="Ayaan" --stat     # everything you did
-git log --author="Claude" --stat    # everything Claude did
-```
+1. Workpaper prototype: event-sourced workpaper, independent checks, docs
+2. Contribution slots belong to Ayaan (rename from Abbas)
+3. Deploy via GitHub Pages: relative base path and Actions workflow
+4. AI usage draft: GitHub Pages
+5. Add Railway deployment: dependency-free Node server and railway.json
 
-Code you own is also marked in-file with `AYAAN-SLOT` headers, and in the UI with a purple **✎ Ayaan** tag.
+Every commit after these is my own work.
 
+Code I own is also marked in-file with `AYAAN-SLOT` headers, and in the UI with a purple **✎ Ayaan** tag.
 ## Ledger
 
 | Area | Built by | Ayaan's part | Status |
