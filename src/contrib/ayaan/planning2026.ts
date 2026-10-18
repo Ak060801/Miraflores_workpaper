@@ -29,24 +29,145 @@ export interface Installment { jurisdiction: 'federal' | 'california'; due: stri
 export interface Plan { installments: Installment[]; assumptions: string[]; author: 'baseline' | 'ayaan' }
 
 export function plan2026(i: PlanInput): Plan {
-  // ---- BASELINE (Claude) - replace with Ayaan's plan ---------------------
-  const fedTarget = Math.round(i.fed2025TotalTax * 1.1);
-  const fedNet = Math.max(0, fedTarget - i.fedWithholding2025);
-  const fedEach = Math.ceil(fedNet / 4 / 10) * 10;
-  const caTarget = Math.round(i.ca2025TotalTax * 1.1);
-  const caNet = Math.max(0, caTarget - 0);
-  const pct: number[] = i.ref.california_installment_percentages;
+
+  // 1. Write down the facts from the packet
+  const total2025Wages = 212400;
+  const halvorsenWages = 107800;
+  const halvorsenTaxWithheld = 9600;
+  const condoGain = 105040;
+  const sCorpExcess = 21215;
+
+  const wageTaxRate = 0.31;
+  const gainTaxRate = 0.238;
+  const californiaTaxRate = 0.093;
+
+  const sacramentoRental = -5107;
+  const ridgelineCaliforniaShare = 1848;
+
+  // 2. Work out Ngozi's 2026 wages
+  const fullYearHalvorsenWages = halvorsenWages * 12 / 7;
+  const wageChange = fullYearHalvorsenWages - total2025Wages;
+
+  // 3. Project the 2026 federal tax
+  let projectedFederalTax = i.fed2025TotalTax;
+
+  projectedFederalTax =
+    projectedFederalTax + wageChange * wageTaxRate;
+
+  projectedFederalTax =
+    projectedFederalTax - condoGain * gainTaxRate;
+
+  projectedFederalTax =
+    projectedFederalTax - sCorpExcess * gainTaxRate;
+
+  projectedFederalTax =
+    projectedFederalTax - i.minimumTaxCredit;
+
+  if (projectedFederalTax < 0) {
+    projectedFederalTax = 0;
+  }
+
+  // 4. Decide how much federal tax to prepay
+  const optionA = i.fed2025TotalTax * 1.1;
+  const optionB = projectedFederalTax * 0.9;
+
+  let requiredFederalTax = optionA;
+
+  if (optionB < optionA) {
+    requiredFederalTax = optionB;
+  }
+
+  // 5. Subtract withholding and split into 4 payments
+  const expectedWithholding = halvorsenTaxWithheld * 12 / 7;
+
+  let amountToPay = requiredFederalTax - expectedWithholding;
+
+  if (amountToPay < 0) {
+    amountToPay = 0;
+  }
+
+  const paymentBeforeRounding = amountToPay / 4;
+  const federalPayment = Math.ceil(paymentBeforeRounding / 10) * 10;
+
+  // 6. Calculate California tax
+  const californiaIncome =
+    sacramentoRental + ridgelineCaliforniaShare;
+
+  let californiaTax = californiaIncome * californiaTaxRate;
+
+  if (californiaTax < 0) {
+    californiaTax = 0;
+  }
+  // 7. Build the payment list
+  const installments: Plan["installments"] = [];
+
+  // Add the federal payments
+  for (const date of i.ref.federal_estimate_due_dates) {
+    installments.push({
+      jurisdiction: "federal",
+      due: date,
+      amount: federalPayment
+    });
+  }
+
+  // Add the California payments
+  let californiaPaymentNumber = 0;
+
+  for (const date of i.ref.california_estimate_due_dates) {
+    let paymentAmount = 0;
+
+    if (californiaTax >= 500) {
+      const percentage =
+        i.ref.california_installment_percentages[californiaPaymentNumber];
+
+      paymentAmount = Math.round(californiaTax * percentage);
+    }
+
+    installments.push({
+      jurisdiction: "california",
+      due: date,
+      amount: paymentAmount
+    });
+
+    californiaPaymentNumber = californiaPaymentNumber + 1;
+  }
+
+  // 8. Explain the assumptions
+  const assumptions: string[] = [];
+  assumptions.push(
+    "Projected 2026 federal tax is " + Math.round(projectedFederalTax) + ", so we prepay " + Math.round(amountToPay) + " in four payments of " + federalPayment + "."
+  );
+
+  assumptions.push(
+    "2026 wages are estimated by annualizing Halvorsen wages for 12 months."
+  );
+
+  assumptions.push(
+    "2026 wages are estimated by annualizing Halvorsen wages for 12 months."
+  );
+
+  assumptions.push(
+    "The wage change is calculated by comparing annualized Halvorsen wages with 2025 total wages."
+  );
+
+  assumptions.push(
+    "The condo gain and S corporation excess are subtracted because they are assumed not to repeat in 2026."
+  );
+
+  assumptions.push(
+    "The federal tax projection subtracts the minimum tax credit and cannot be below zero."
+  );
+
+  assumptions.push(
+    "Federal payments use the smaller of 110% of 2025 tax and 90% of projected 2026 tax, after estimated withholding. California tax is based on the specified California-source income, with no estimates required when the tax is below $500."
+  );
+
   return {
-    author: 'baseline',
-    installments: [
-      ...i.ref.federal_estimate_due_dates.map((d: string) => ({ jurisdiction: 'federal' as const, due: d, amount: fedEach })),
-      ...i.ref.california_estimate_due_dates.map((d: string, k: number) => ({ jurisdiction: 'california' as const, due: d, amount: Math.round(caNet * pct[k]) })),
-    ],
-    assumptions: [
-      'Federal: 110% of 2025 total tax (AGI over 150,000), less 2025-level withholding, in four equal payments.',
-      'California: 110% of 2025 tax, 30/40/30 split. Ignores that 2026 California tax covers only California-source income.',
-      'Baseline only: does not use the minimum tax credit, the SEP limit or a lower 90%-of-current-year target.',
-    ],
+    author: "ayaan",
+    installments: installments,
+    assumptions: assumptions
   };
-  // ------------------------------------------------------------------------
 }
+
+
+

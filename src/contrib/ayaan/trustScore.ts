@@ -35,15 +35,83 @@ export interface TrustResult {
   reasons: string[];
 }
 
+
 export function trustScore(i: TrustInput): TrustResult {
-  // ---- BASELINE (Claude) - replace with Ayaan's model --------------------
   let score = i.ev.confidence;
-  const reasons: string[] = [`pipeline confidence ${i.ev.confidence.toFixed(2)}`];
-  if (!i.printedFound) { score *= 0.5; reasons.push('extracted text not found on printed page'); }
-  if (i.verifiedBy.length) { score = Math.max(score, 0.99); reasons.push(`verified: ${i.verifiedBy.join(', ')}`); }
-  const band = score >= 0.95 ? 'trust' : score >= 0.8 ? 'look' : 'verify';
-  return { score, band, reasons };
-  // ------------------------------------------------------------------------
+  let reasons: string[] = [];
+
+  reasons.push("pipeline confidence " + score.toFixed(2));
+
+  // If a person verified it, return immediately
+  if (i.verifiedBy.length > 0) {
+    reasons.push("verified by " + i.verifiedBy.join(", "));
+
+    return {
+      score: 0.99,
+      band: "trust",
+      reasons: reasons
+    };
+  }
+
+  // Check if the value was found on the printed page
+  if (i.printedFound === false) {
+    score = Math.min(score, 0.30);
+    reasons.push("not found on the printed page");
+  }
+
+  // Check if any checks failed
+  if (i.failingChecks.length > 0) {
+    score = Math.min(score, 0.50);
+    reasons.push("failing checks: " + i.failingChecks.join(", "));
+  }
+
+  // Reduce the score if the value is handwritten
+  if (i.isHandwritten === true) {
+    score = score * 0.85;
+    reasons.push("value is handwritten");
+  }
+
+  // Increase the score for each supporting reference
+  for (let ref of i.corroboratingRefs) {
+    score = score + 0.05;
+
+    if (score > 1) {
+      score = 1;
+    }
+
+    reasons.push("supporting reference: " + ref);
+  }
+
+  // Check if the value is not used on the return
+  if (
+    i.usedInLines.length === 0 &&
+    i.printedFound === true &&
+    i.failingChecks.length === 0
+  ) {
+    if (score < 0.90) {
+      score = 0.90;
+    }
+
+    reasons.push("not used on the return");
+  }
+
+  // Decide which band the score belongs to
+  let band: "trust" | "look" | "verify";
+
+  if (score >= 0.90) {
+    band = "trust";
+  } else if (score >= 0.70) {
+    band = "look";
+  } else {
+    band = "verify";
+  }
+
+  return {
+    score: score,
+    band: band,
+    reasons: reasons
+  };
 }
 
-export const TRUST_SCORE_AUTHOR: 'baseline' | 'ayaan' = 'baseline';
+
+export const TRUST_SCORE_AUTHOR: 'baseline' | 'ayaan' = 'ayaan';
