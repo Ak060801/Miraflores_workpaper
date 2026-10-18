@@ -1,6 +1,5 @@
 # How AI was used
 
-> Draft for Ayaan to edit. Keep only what is true, in your own words. The brief says "Use any tools you like, including AI; tell us how", so precision here is worth more than modesty or polish.
 
 **Tool:** Claude (Anthropic), used as a pair engineer in an agentic coding environment that could read the packet, run Python and Node, build the app and drive a headless browser.
 
