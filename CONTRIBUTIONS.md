@@ -31,6 +31,6 @@ Code you own is also marked in-file with `AYAAN-SLOT` headers, and in the UI wit
 | One-page core idea (`docs/CORE_IDEA.md`) | Draft by Claude | **Rewrite in your own words; you present it** | ☐ |
 | Video walkthrough (`docs/VIDEO_SCRIPT.md`) | Script draft by Claude | **Record it yourself; adapt the script to your voice** | ☐ |
 | AI usage statement (`docs/AI_USAGE.md`) | Draft by Claude | **Make it accurate to what you actually did** | ☐ |
-| Deployment (GitHub Pages workflow) | Workflow and instructions by Claude | **Create the repo, push, enable Pages, submit the link** | ☐ |
+| Deployment (GitHub Pages workflow + Railway config and server) | Workflow, `railway.json`, `server.mjs` and instructions by Claude | **Create the repo, push, enable Pages, connect Railway, submit the link** | ☐ |
 
 Add a row for anything else you change.

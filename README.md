@@ -14,6 +14,7 @@ npm install
 npm run dev        # http://localhost:5173
 npm run build      # static site in dist/
 npm run check      # run the independent checks from the command line
+npm start          # serve the built site with the Node server (what Railway runs)
 ```
 
 The packet is loaded as delivered from `public/packet.json`. Everything the workpaper adds is an append-only event log saved in the browser (Firm › Data exports and imports it). Open two tabs as two roles to see live collaboration.
@@ -30,6 +31,17 @@ The packet is loaded as delivered from `public/packet.json`. Everything the work
 4. The included workflow (`.github/workflows/deploy.yml`) builds and deploys on every push to `main`. Watch it under the **Actions** tab; when it finishes, the site is at `https://<your-username>.github.io/<repo-name>/`.
 
 No server, secrets or environment variables are needed. The build uses a relative base path, so it works under any repository name.
+
+## Deploy on Railway
+
+Railway deploys from the same GitHub repository.
+
+1. Push the repository to GitHub first (steps above).
+2. On railway.com: **New Project › Deploy from GitHub repo**, and pick this repository. Approve Railway's GitHub access if asked.
+3. Railway reads `railway.json`: it runs `npm run build`, then `npm start` (a dependency-free Node server, `server.mjs`, that serves `dist/` on Railway's `PORT`).
+4. When the deployment is green, open the service's **Settings › Networking** and click **Generate Domain**. That URL is your Railway link.
+
+Every push to `main` redeploys both GitHub Pages and Railway.
 
 ## Try it
 
