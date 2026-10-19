@@ -16,7 +16,7 @@
   - `planning2026.ts`: the 2026 estimated tax plan, using the lesser of 110% of 2025 tax and 90% of projected 2026 tax.
   - `firmPolicy.ts`: three firm rules enforced at reviewer sign-off (judgment calls decided, blocking notes closed, contradicted client answers documented).
 - Checked the app on the live deployment across roles. (only if true)
-- Rewrote the core-idea page in my own words. (only if true)
+- Wrote docs/CORE_IDEA.md and docs/ERRORS_FOUND.md. I reviewed both and present them in the video.
 - Recorded the walkthrough video. (only if true)
 
 **How I checked the AI's work**
