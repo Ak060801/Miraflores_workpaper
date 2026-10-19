@@ -25,7 +25,7 @@ export interface Policy {
 export const POLICIES: Policy[] = [
   {
     id: 'example-low-confidence',
-    author: 'ayaan',
+    author: 'example',
     blocks: 'reviewer',
     text: 'Any extracted value read below 0.60 confidence that reaches the return needs a recorded verification before reviewer sign-off.',
     test: ({ m, wp, area }) => {
