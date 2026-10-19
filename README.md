@@ -2,10 +2,10 @@
 
 A web-native tax workpaper for one complex household's 2025 return (Form 1040 MFJ + California 540NR). Built for the "Redesign the Tax Workpaper" case study.
 
+- **Live app:** https://mirafloresworkpaper-production.up.railway.app
 - **Core idea and data model:** [`docs/CORE_IDEA.md`](docs/CORE_IDEA.md)
 - **Errors found and how the design surfaced them:** [`docs/ERRORS_FOUND.md`](docs/ERRORS_FOUND.md)
-- **Walkthrough script:** [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md)
-- **How AI was used / who built what:** [`docs/AI_USAGE.md`](docs/AI_USAGE.md), [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md)
+- **How AI was used / who built what:** [`docs/AI_USAGE.md`](docs/AI_USAGE.md)
 
 ## Run it
 
@@ -17,31 +17,19 @@ npm run check      # run the independent checks from the command line
 npm start          # serve the built site with the Node server (what Railway runs)
 ```
 
-The packet is loaded as delivered from `public/packet.json`. Everything the workpaper adds is an append-only event log saved in the browser (Firm › Data exports and imports it). Open two tabs as two roles to see live collaboration.
+The packet is loaded as delivered from `public/packet.json`. Everything the workpaper adds is an append-only event log saved in the browser (Firm &Standards › Data exports and imports it). Open two tabs as two roles to see live collaboration.
 
-## Deploy on GitHub Pages (gives you the link to submit)
-
-1. Create a new repository on GitHub (public, or private on a plan that allows Pages). Any name works.
-2. Push this folder to it:
-   ```bash
-   git remote add origin https://github.com/<your-username>/<repo-name>.git
-   git push -u origin main
-   ```
-3. On GitHub: **Settings › Pages › Build and deployment › Source: GitHub Actions**.
-4. The included workflow (`.github/workflows/deploy.yml`) builds and deploys on every push to `main`. Watch it under the **Actions** tab; when it finishes, the site is at `https://<your-username>.github.io/<repo-name>/`.
-
-No server, secrets or environment variables are needed. The build uses a relative base path, so it works under any repository name.
 
 ## Deploy on Railway
 
 Railway deploys from the same GitHub repository.
 
-1. Push the repository to GitHub first (steps above).
+1. Push the repository to GitHub.
 2. On railway.com: **New Project › Deploy from GitHub repo**, and pick this repository. Approve Railway's GitHub access if asked.
 3. Railway reads `railway.json`: it runs `npm run build`, then `npm start` (a dependency-free Node server, `server.mjs`, that serves `dist/` on Railway's `PORT`).
 4. When the deployment is green, open the service's **Settings › Networking** and click **Generate Domain**. That URL is your Railway link.
 
-Every push to `main` redeploys both GitHub Pages and Railway.
+Every push to `main` redeploys Railway.
 
 ## Try it
 
@@ -61,7 +49,7 @@ src/
   app/         context, permission-checked actions, filing gate, demo season seed
   ui/          trace drawer, document viewer, shared components
   views/       screens
-  contrib/ayaan/  contribution slots owned by Ayaan (see CONTRIBUTIONS.md)
+  contrib/ayaan/  contribution slots owned by Ayaan 
 scripts/       command-line check runner
 docs/          the written deliverables
 ```
